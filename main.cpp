@@ -1,4 +1,52 @@
-// function main(argc, argv)
+#include "CacheUtils.h"
+
+int main(int argc, char* argv[]) {
+    if (argc != 4) {
+        std::cerr << "Usage: ./cache_sim <num_entries> <associativity> <memory_reference_file>" << std::endl;
+        return 1; 
+    }
+
+    int num_entries = std::stoi(argv[1]);
+    int associativity = std::stoi(argv[2]);
+    std::string memory_reference_file = argv[3];
+
+    Cache* cache = initialize_cache(num_entries, associativity);
+
+    std::vector<int> memory_addresses = read_memory_addresses(memory_reference_file);
+
+    std::ofstream output_file("cache_sim_output");
+    if (!output_file.is_open()) {
+        std::cerr << "Failed to open output file." << std::endl;
+        delete cache; 
+        return 1;
+    }
+
+    for (int address : memory_addresses) {
+        std::string result = access_cache(cache, address);
+        write_output(output_file, address, result);
+    }
+
+    output_file.close();
+    delete cache; 
+
+    return 0;
+}
+
+// int main() {
+//     int num_entries = 16;  // Total number of cache entries
+//     int associativity = 4;  // Number of entries per set
+
+//     Cache* myCache = initialize_cache(num_entries, associativity);
+//     std::cout << "Cache initialized with " << myCache->number_of_sets << " sets and "
+//               << myCache->associativity << " associativity per set." << std::endl;
+
+//     // Remember to free memory used by Cache when done
+//     delete myCache;
+
+//     return 0;
+// }
+
+// int main(argc, argv)
 //     if argc != 4
 //         print "Usage: ./cache_sim <num_entries> <associativity> <memory_reference_file>"
 //         exit
@@ -59,23 +107,3 @@
 
 // function write_output(file, address, result)
 //     write_line_to_file(file, format("{0} : {1}", address, result))
-
-
-
-
-// #include <iostream>
-// #include "CacheUtils.h"
-
-// int main() {
-//     int num_entries = 16;  // Total number of cache entries
-//     int associativity = 4;  // Number of entries per set
-
-//     Cache* myCache = initialize_cache(num_entries, associativity);
-//     std::cout << "Cache initialized with " << myCache->number_of_sets << " sets and "
-//               << myCache->associativity << " associativity per set." << std::endl;
-
-//     // Remember to free memory used by Cache when done
-//     delete myCache;
-
-//     return 0;
-// }

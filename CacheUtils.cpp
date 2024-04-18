@@ -1,10 +1,5 @@
 #include "CacheUtils.h"
 
-#include <iostream>
-#include <fstream> 
-#include <sstream>
-//#include <iomanip> // May be useful for formatting if needed
-
 // Function to initialize cache
 Cache* initialize_cache(int num_entries, int associativity) {
     int number_of_sets = num_entries / associativity;

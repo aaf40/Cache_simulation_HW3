@@ -4,4 +4,5 @@
 
 #unignore what we want to track
 !*.cpp
+!memory_references.txt
 !.gitignore
