@@ -67,18 +67,19 @@ int calculate_tag(int address) {
 // Function to update the cache when a miss occurs
 void update_cache(std::vector<CacheEntry>& set, int new_tag) {
     for (auto& entry : set) {
-        if (!entry.valid) { 
-            delete entry.tag; 
-            entry.tag = new int(new_tag);  
-            entry.valid = true; 
+        if (!entry.valid) {
+            delete entry.tag;
+            entry.tag = new int(new_tag);
+            entry.valid = true;
             return;
         }
     }
 
-    delete set[0].tag;
-    set[0].tag = new int(new_tag);
-    set[0].valid = true;
+    delete set[0].tag; 
+    set[0].tag = new int(new_tag);  
+    set[0].valid = true; 
 }
+
 
 // Function to write the output to a file
 void write_output(std::ofstream& file, int address, const std::string& result) {
