@@ -9,8 +9,6 @@ public:
     int number_of_sets;
     int associativity;
     std::vector<std::vector<CacheEntry>> sets;
-    std::list<int> lru_list;
-    unsigned long currentTime;
 
     Cache(int num_sets, int assoc) : number_of_sets(num_sets), associativity(assoc) {
         sets.resize(number_of_sets, std::vector<CacheEntry>(associativity));

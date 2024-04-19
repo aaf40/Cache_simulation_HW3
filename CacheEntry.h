@@ -7,9 +7,6 @@ class CacheEntry {
 public:
     bool valid;
     int* tag;
-    std::list<int>::iterator lru_iterator;
-    std::list<int>::iterator position;
-    unsigned long lastUsed;
 
     CacheEntry() : valid(false), tag(nullptr) {}
 };
