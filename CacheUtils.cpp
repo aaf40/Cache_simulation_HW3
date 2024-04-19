@@ -8,7 +8,7 @@ Cache* initialize_cache(int num_entries, int associativity) {
     for (auto& set : cache->sets) {
         for (auto& entry : set) {
             entry.valid = false;
-            entry.tag = nullptr;
+            entry.tag = -1;  // Initialize tag with -1 indicating it is not valid
         }
     }
 
@@ -45,7 +45,7 @@ std::string access_cache(Cache* cache, int address) {
     auto& set = cache->sets[set_index];
 
     for (auto& entry : set) {
-        if (entry.valid && entry.tag && *(entry.tag) == tag) { 
+        if (entry.valid && entry.tag == tag) {
             return "HIT";
         }
     }
@@ -65,19 +65,20 @@ int calculate_tag(int address) {
 }
 
 // Function to update the cache when a miss occurs
+
 void update_cache(std::vector<CacheEntry>& set, int new_tag) {
+    // Replace the first invalid entry, or replace the first entry if all are valid
     for (auto& entry : set) {
         if (!entry.valid) {
-            delete entry.tag;
-            entry.tag = new int(new_tag);
+            entry.tag = new_tag;
             entry.valid = true;
             return;
         }
     }
 
-    delete set[0].tag; 
-    set[0].tag = new int(new_tag);  
-    set[0].valid = true; 
+    // Simple replacement policy (could be improved with LRU or another strategy)
+    set[0].tag = new_tag;
+    set[0].valid = true;
 }
 
 
