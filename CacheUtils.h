@@ -12,8 +12,8 @@
 
 Cache* initialize_cache(int num_entries, int associativity);
 std::vector<int> read_memory_addresses(const std::string& file_path);
-std::string access_cache(Cache* cache, int address);
-void update_cache(std::vector<CacheEntry>& set, int new_tag);
+std::string access_cache(Cache* cache, int address, int currentTime);
+void update_cache(std::vector<CacheEntry>& set, int new_tag, int currentTime);
 int calculate_set_index(int address, int number_of_sets);
 int calculate_tag(int address);
 void write_output(std::ofstream& file, int address, const std::string& result);

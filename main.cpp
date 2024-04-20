@@ -21,8 +21,9 @@ int main(int argc, char* argv[]) {
         return 1;
     }
 
+    int currentTime = 1;  // Initialize a counter to track access time
     for (int address : memory_addresses) {
-        std::string result = access_cache(cache, address);
+        std::string result = access_cache(cache, address, currentTime++);
         write_output(output_file, address, result);
     }
 

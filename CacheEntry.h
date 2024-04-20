@@ -7,8 +7,9 @@ class CacheEntry {
 public:
     bool valid;
     int tag;  
+    int lastUsed;
 
-    CacheEntry() : valid(false), tag(-1) { } 
+    CacheEntry() : valid(false), tag(-1), lastUsed(0) { }
 };
 
 #endif
