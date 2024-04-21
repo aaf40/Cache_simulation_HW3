@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
 
     std::vector<int> memory_addresses = read_memory_addresses(memory_reference_file);
 
-    std::ofstream output_file("cache_sim_output");
+    std::ofstream output_file("cache_sim_output.txt");
     if (!output_file.is_open()) {
         std::cerr << "Failed to open output file." << std::endl;
         delete cache; 
